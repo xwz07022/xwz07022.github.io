@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>IO流 | Cancer</title><meta name="author" content="谢_sir"><meta name="copyright" content="谢_sir"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="IO流  一、谈谈Java IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞输入流就是从外部文件输入到内存，输出流主要是从内存输出到文件。IO里面常见的类，第一印象就只知道IO流中有很多类，IO流主要分为字符流和字节流。字符流中有抽象类InputStream和OutputStream，它们的子类FileInputStream，FileOutputStream,BufferedOutputS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO流">
+<meta property="og:url" content="http://example.com/2022/07/12/IO%E6%B5%81/index.html">
+<meta property="og:site_name" content="Cancer">
+<meta property="og:description" content="IO流  一、谈谈Java IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞输入流就是从外部文件输入到内存，输出流主要是从内存输出到文件。IO里面常见的类，第一印象就只知道IO流中有很多类，IO流主要分为字符流和字节流。字符流中有抽象类InputStream和OutputStream，它们的子类FileInputStream，FileOutputStream,BufferedOutputS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg">
+<meta property="article:published_time" content="2022-07-12T00:14:43.000Z">
+<meta property="article:modified_time" content="2022-07-12T00:21:37.946Z">
+<meta property="article:author" content="谢_sir">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/07/12/IO%E6%B5%81/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'IO流',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-12 08:21:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://w.wallhaven.cc/full/z8/wallhaven-z8e8qy.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://img.netbian.com/file/2022/0704/000225CvfSY.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Cancer</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">IO流</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-12T00:14:43.000Z" title="Created 2022-07-12 08:14:43">2022-07-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-12T00:21:37.946Z" title="Updated 2022-07-12 08:21:37">2022-07-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="IO流"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><p><img src="https://img-blog.csdnimg.cn/43223e47dd6441a188b4736dcb72a923.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAbG53ZF9fXw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/ec46c0dd3a9f4420bb0fe4db60f50538.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAbG53ZF9fXw==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="一、谈谈Java-IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞"><a href="#一、谈谈Java-IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞" class="headerlink" title="一、谈谈Java IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞"></a>一、谈谈Java IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞</h2><p>输入流就是从外部文件输入到内存，输出流主要是从内存输出到文件。<br>IO里面常见的类，第一印象就只知道IO流中有很多类，IO流主要分为字符流和字节流。字符流中有抽象类InputStream和OutputStream，它们的子类FileInputStream，FileOutputStream,BufferedOutputStream等。字符流BufferedReader和Writer等。都实现了Closeable, Flushable, Appendable这些接口。程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。<br>java中的阻塞式方法是指在程序调用改方法时，必须等待输入数据可用或者检测到输入结束或者抛出异常，否则程序会一直停留在该语句上，不会执行下面的语句。比如read()和readLine()方法。</p>
+<h2 id="二、什么是节点流-什么是处理流-它们各有什么用处-处理流的创建有什么特征"><a href="#二、什么是节点流-什么是处理流-它们各有什么用处-处理流的创建有什么特征" class="headerlink" title="二、什么是节点流,什么是处理流,它们各有什么用处,处理流的创建有什么特征"></a>二、什么是节点流,什么是处理流,它们各有什么用处,处理流的创建有什么特征</h2><p>节点流 直接与数据源相连，用于输入或者输出<br>处理流：在节点流的基础上对之进行加工，进行一些功能的扩展<br>处理流的构造器必须要 传入节点流的子类</p>
+<h2 id="三、讲讲NIO"><a href="#三、讲讲NIO" class="headerlink" title="三、讲讲NIO"></a>三、讲讲NIO</h2><p>传统的IO流是阻塞式的，会一直监听一个ServerSocket，在调用read等方法时，他会一直等到数据到来或者缓冲区已满时才返回。调用accept也是一直阻塞到有客户端连接才会返回。每个客户端连接过来后，服务端都会启动一个线程去处理该客户端的请求。并且多线程处理多个连接。每个线程拥有自己的栈空间并且占用一些 CPU 时间。每个线程遇到外部未准备好的时候，都会阻塞掉。阻塞的结果就是会带来大量的进程上下文切换。<br>对于NIO，它是非阻塞式，核心类：<br>1.Buffer为所有的原始类型提供 (Buffer)缓存支持。<br>2.Charset字符集编码解码解决方案<br>3.Channel一个新的原始 I&#x2F;O抽象，用于读写Buffer类型，通道可以认为是一种连接，可以是到特定设备，程序或者是网络的连接。</p>
+<h2 id="四、字节流和字符流哪个好？怎么选择？"><a href="#四、字节流和字符流哪个好？怎么选择？" class="headerlink" title="四、字节流和字符流哪个好？怎么选择？"></a>四、字节流和字符流哪个好？怎么选择？</h2><p>1.大多数情况下使用字节流会更好，因为大多数时候 IO 操作都是直接操作磁盘文件，所以这些流在传输时都是以字节的方式进行的（图片等都是按字节存储的）<br>2.如果对于操作需要通过 IO 在内存中频繁处理字符串的情况使用字符流会好些，因为字符流具备缓冲区，提高了性能</p>
+<h2 id="五、什么是缓冲区？有什么作用？"><a href="#五、什么是缓冲区？有什么作用？" class="headerlink" title="五、什么是缓冲区？有什么作用？"></a>五、什么是缓冲区？有什么作用？</h2><p>1.缓冲区就是一段特殊的内存区域，很多情况下当程序需要频繁地操作一个资源（如文件或数据库）则性能会很低，所以为了提升性能就可以将一部分数据暂时读写到缓存区，以后直接从此区域中读写数据即可，这样就显著提升了性。<br>2.对于 Java 字符流的操作都是在缓冲区操作的，所以如果我们想在字符流操作中主动将缓冲区刷新到文件则可以使用 flush() 方法操作。</p>
+<h2 id="六、字符流和字节流有什么区别？"><a href="#六、字符流和字节流有什么区别？" class="headerlink" title="六、字符流和字节流有什么区别？"></a>六、字符流和字节流有什么区别？</h2><p>字符流和字节流的使用非常相似，但是实际上字节流的操作不会经过缓冲区（内存）而是直接操作文本本身的，而字符流的操作会先经过缓冲区（内存）然后通过缓冲区再操作文件</p>
+<h2 id="七、什么是Java序列化，如何实现Java序列化？"><a href="#七、什么是Java序列化，如何实现Java序列化？" class="headerlink" title="七、什么是Java序列化，如何实现Java序列化？"></a>七、什么是Java序列化，如何实现Java序列化？</h2><p>序列化就是一种用来处理对象流的机制，将对象的内容进行流化。可以对流化后的对象进行读写操作，可以将流化后的对象传输于网络之间。序列化是为了解决在对象流读写操作时所引发的问题<br>序列化的实现：将需要被序列化的类实现Serialize接口，没有需要实现的方法，此接口只是为了标注对象可被序列化的，然后使用一个输出流（如：FileOutputStream）来构造一个ObjectOutputStream(对象流)对象，再使用ObjectOutputStream对象的write(Object obj)方法就可以将参数obj的对象写出</p>
+<h2 id="八、PrintStream、BufferedWriter、PrintWriter的比较"><a href="#八、PrintStream、BufferedWriter、PrintWriter的比较" class="headerlink" title="八、PrintStream、BufferedWriter、PrintWriter的比较?"></a>八、PrintStream、BufferedWriter、PrintWriter的比较?</h2><p>PrintStream类的输出功能非常强大，通常如果需要输出文本内容，都应该将输出流包装成PrintStream后进行输出。它还提供其他两项功能。与其他输出流不同，PrintStream 永远不会抛出 IOException；而是，异常情况仅设置可通过 checkError 方法测试的内部标志。另外，为了自动刷新，可以创建一个 PrintStream<br>BufferedWriter:将文本写入字符输出流，缓冲各个字符从而提供单个字符，数组和字符串的高效写入。通过write()方法可以将获取到的字符输出，然后通过newLine()进行换行操作。BufferedWriter中的字符流必须通过调用flush方法才能将其刷出去。并且BufferedWriter只能对字符流进行操作。如果要对字节流操作，则使用BufferedInputStream<br>PrintWriter的println方法自动添加换行，不会抛异常，若关心异常，需要调用checkError方法看是否有异常发生，PrintWriter构造方法可指定参数，实现自动刷新缓存（autoflush）</p>
+<h2 id="九、BufferedReader属于哪种流-它主要是用来做什么的-它里面有那些经典的方法？"><a href="#九、BufferedReader属于哪种流-它主要是用来做什么的-它里面有那些经典的方法？" class="headerlink" title="九、BufferedReader属于哪种流,它主要是用来做什么的,它里面有那些经典的方法？"></a>九、BufferedReader属于哪种流,它主要是用来做什么的,它里面有那些经典的方法？</h2><p>属于处理流中的缓冲流，可以将读取的内容存在内存里面，有readLine()方法，它，用来读取一行</p>
+<h2 id="十、流一般需要不需要关闭-如果关闭的话在用什么方法-一般要在那个代码块里面关闭比较好，处理流是怎么关闭的，如果有多个流互相调用传入是怎么关闭的？"><a href="#十、流一般需要不需要关闭-如果关闭的话在用什么方法-一般要在那个代码块里面关闭比较好，处理流是怎么关闭的，如果有多个流互相调用传入是怎么关闭的？" class="headerlink" title="十、流一般需要不需要关闭,如果关闭的话在用什么方法,一般要在那个代码块里面关闭比较好，处理流是怎么关闭的，如果有多个流互相调用传入是怎么关闭的？"></a>十、流一般需要不需要关闭,如果关闭的话在用什么方法,一般要在那个代码块里面关闭比较好，处理流是怎么关闭的，如果有多个流互相调用传入是怎么关闭的？</h2><p>流一旦打开就必须关闭，使用close方法<br>放入finally语句块中（finally 语句一定会执行）<br>调用的处理流就关闭处理流<br>多个流互相调用只关闭最外层的流</p>
+<h2 id="十一、InputStream里的read-返回的是什么-read-byte-data-是什么意思-返回的是什么值？"><a href="#十一、InputStream里的read-返回的是什么-read-byte-data-是什么意思-返回的是什么值？" class="headerlink" title="十一、InputStream里的read()返回的是什么,read(byte[] data)是什么意思,返回的是什么值？"></a>十一、InputStream里的read()返回的是什么,read(byte[] data)是什么意思,返回的是什么值？</h2><p>返回的是所读取的字节的int型（范围0-255）<br>read（byte [ ] data）将读取的字节储存在这个数组。返回的就是传入数组参数个数</p>
+<h2 id="十二、-OutputStream里面的write-是什么意思-write-byte-b-int-off-int-len-这个方法里面的三个参数分别是什么意思？"><a href="#十二、-OutputStream里面的write-是什么意思-write-byte-b-int-off-int-len-这个方法里面的三个参数分别是什么意思？" class="headerlink" title="十二、 OutputStream里面的write()是什么意思,write(byte b[], int off, int len)这个方法里面的三个参数分别是什么意思？"></a>十二、 OutputStream里面的write()是什么意思,write(byte b[], int off, int len)这个方法里面的三个参数分别是什么意思？</h2><p>write将指定字节传入数据源<br>Byte b[ ]是byte数组<br>b[off]是传入的第一个字符、b[off+len-1]是传入的最后的一个字符 、len是实际长度</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">谢_sir</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/12/IO%E6%B5%81/">http://example.com/2022/07/12/IO%E6%B5%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/12/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"><img class="prev-cover" src="https://pic.netbian.com/uploads/allimg/211021/232902-16348301422b2a.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">集合框架</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><img class="next-cover" src="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">多线程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://w.wallhaven.cc/full/z8/wallhaven-z8e8qy.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">谢_sir</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xwz07022/xwz07022.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:3453138058@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B0%88%E8%B0%88Java-IO%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B8%B8%E8%A7%81%E7%B1%BB%EF%BC%8C%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%8C%E5%AD%97%E7%AC%A6%E6%B5%81%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E5%AE%9E%E7%8E%B0%E7%B1%BB%E3%80%81%E6%96%B9%E6%B3%95%E9%98%BB%E5%A1%9E"><span class="toc-number">1.1.</span> <span class="toc-text">一、谈谈Java IO里面的常见类，字节流，字符流、接口、实现类、方法阻塞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%8A%82%E7%82%B9%E6%B5%81-%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%84%E7%90%86%E6%B5%81-%E5%AE%83%E4%BB%AC%E5%90%84%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84-%E5%A4%84%E7%90%86%E6%B5%81%E7%9A%84%E5%88%9B%E5%BB%BA%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E5%BE%81"><span class="toc-number">1.2.</span> <span class="toc-text">二、什么是节点流,什么是处理流,它们各有什么用处,处理流的创建有什么特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AE%B2%E8%AE%B2NIO"><span class="toc-number">1.3.</span> <span class="toc-text">三、讲讲NIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AD%97%E8%8A%82%E6%B5%81%E5%92%8C%E5%AD%97%E7%AC%A6%E6%B5%81%E5%93%AA%E4%B8%AA%E5%A5%BD%EF%BC%9F%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">四、字节流和字符流哪个好？怎么选择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">五、什么是缓冲区？有什么作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AD%97%E7%AC%A6%E6%B5%81%E5%92%8C%E5%AD%97%E8%8A%82%E6%B5%81%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">六、字符流和字节流有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJava%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Java%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">七、什么是Java序列化，如何实现Java序列化？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81PrintStream%E3%80%81BufferedWriter%E3%80%81PrintWriter%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.8.</span> <span class="toc-text">八、PrintStream、BufferedWriter、PrintWriter的比较?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81BufferedReader%E5%B1%9E%E4%BA%8E%E5%93%AA%E7%A7%8D%E6%B5%81-%E5%AE%83%E4%B8%BB%E8%A6%81%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84-%E5%AE%83%E9%87%8C%E9%9D%A2%E6%9C%89%E9%82%A3%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">九、BufferedReader属于哪种流,它主要是用来做什么的,它里面有那些经典的方法？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%B5%81%E4%B8%80%E8%88%AC%E9%9C%80%E8%A6%81%E4%B8%8D%E9%9C%80%E8%A6%81%E5%85%B3%E9%97%AD-%E5%A6%82%E6%9E%9C%E5%85%B3%E9%97%AD%E7%9A%84%E8%AF%9D%E5%9C%A8%E7%94%A8%E4%BB%80%E4%B9%88%E6%96%B9%E6%B3%95-%E4%B8%80%E8%88%AC%E8%A6%81%E5%9C%A8%E9%82%A3%E4%B8%AA%E4%BB%A3%E7%A0%81%E5%9D%97%E9%87%8C%E9%9D%A2%E5%85%B3%E9%97%AD%E6%AF%94%E8%BE%83%E5%A5%BD%EF%BC%8C%E5%A4%84%E7%90%86%E6%B5%81%E6%98%AF%E6%80%8E%E4%B9%88%E5%85%B3%E9%97%AD%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%B5%81%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%E4%BC%A0%E5%85%A5%E6%98%AF%E6%80%8E%E4%B9%88%E5%85%B3%E9%97%AD%E7%9A%84%EF%BC%9F"><span class="toc-number">1.10.</span> <span class="toc-text">十、流一般需要不需要关闭,如果关闭的话在用什么方法,一般要在那个代码块里面关闭比较好，处理流是怎么关闭的，如果有多个流互相调用传入是怎么关闭的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81InputStream%E9%87%8C%E7%9A%84read-%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88-read-byte-data-%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D-%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E5%80%BC%EF%BC%9F"><span class="toc-number">1.11.</span> <span class="toc-text">十一、InputStream里的read()返回的是什么,read(byte[] data)是什么意思,返回的是什么值？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81-OutputStream%E9%87%8C%E9%9D%A2%E7%9A%84write-%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D-write-byte-b-int-off-int-len-%E8%BF%99%E4%B8%AA%E6%96%B9%E6%B3%95%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8F%82%E6%95%B0%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-number">1.12.</span> <span class="toc-text">十二、 OutputStream里面的write()是什么意思,write(byte b[], int off, int len)这个方法里面的三个参数分别是什么意思？</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/12/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" title="集合框架"><img src="https://pic.netbian.com/uploads/allimg/211021/232902-16348301422b2a.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="集合框架"/></a><div class="content"><a class="title" href="/2022/07/12/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" title="集合框架">集合框架</a><time datetime="2022-07-12T00:22:46.000Z" title="Created 2022-07-12 08:22:46">2022-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/12/IO%E6%B5%81/" title="IO流"><img src="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IO流"/></a><div class="content"><a class="title" href="/2022/07/12/IO%E6%B5%81/" title="IO流">IO流</a><time datetime="2022-07-12T00:14:43.000Z" title="Created 2022-07-12 08:14:43">2022-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程"><img src="http://img.netbian.com/file/2022/0704/000225CvfSY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多线程"/></a><div class="content"><a class="title" href="/2022/07/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程">多线程</a><time datetime="2022-07-12T00:11:14.000Z" title="Created 2022-07-12 08:11:14">2022-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/08/SpringIOC/" title="SpringIOC"><img src="https://w.wallhaven.cc/full/y8/wallhaven-y8vlyk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringIOC"/></a><div class="content"><a class="title" href="/2022/07/08/SpringIOC/" title="SpringIOC">SpringIOC</a><time datetime="2022-07-08T01:30:44.000Z" title="Created 2022-07-08 09:30:44">2022-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/07/%E8%A7%A3%E9%87%8AJSON/" title="解释JSON"><img src="https://w.wallhaven.cc/full/l3/wallhaven-l36282.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解释JSON"/></a><div class="content"><a class="title" href="/2022/07/07/%E8%A7%A3%E9%87%8AJSON/" title="解释JSON">解释JSON</a><time datetime="2022-07-07T06:28:23.000Z" title="Created 2022-07-07 14:28:23">2022-07-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 谢_sir</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
